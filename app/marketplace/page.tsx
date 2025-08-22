@@ -30,7 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, Plus, DollarSign, User, Clock, Tag, Image as ImageIcon, X } from "lucide-react";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 

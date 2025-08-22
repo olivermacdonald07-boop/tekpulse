@@ -20,7 +20,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },

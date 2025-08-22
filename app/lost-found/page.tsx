@@ -34,7 +34,7 @@ import {
   X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import moment from "moment";
 
 export default function LostFoundPage() {

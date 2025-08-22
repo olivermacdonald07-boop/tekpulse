@@ -50,7 +50,7 @@ import {
   UserMinus,
   Settings,
 } from "lucide-react";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 // const communities = [
 //   {

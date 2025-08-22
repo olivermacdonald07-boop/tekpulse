@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 const moment = require("moment");
 import React from "react";
 import { useRouter, useSearchParams } from 'next/navigation'

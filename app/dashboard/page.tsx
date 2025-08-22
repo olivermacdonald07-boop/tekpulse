@@ -30,7 +30,7 @@ import {
   Tag,
 } from "lucide-react";
 import { useState } from "react";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import moment from "moment";
 import { useEffect } from "react";
 
