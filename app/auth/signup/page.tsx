@@ -9,6 +9,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import supabase from "@/lib/supabase";
 
+const unsplashUrl =
+  "https://scontent.facc7-1.fna.fbcdn.net/v/t39.30808-6/480757279_1132762991972865_1751478210031365247_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEHqsHTSkL7rLlp7Lkoj7mPAmwMjUbFyTQCbAyNRsXJNJ-8pEZ0H6TM2O6OJ1xXbtzPetM6us9IhVrCvTPqDYFG&_nc_ohc=mFZqtw_gy_4Q7kNvwENhabR&_nc_oc=AdkrXzDX_T4R9HX5AKrM58D3IPR6fqRZqLLJ9ghzDdbFe2fqM_kKiPetvmqxM4fQjQM&_nc_zt=23&_nc_ht=scontent.facc7-1.fna&_nc_gid=lDVaJZipcJ1Vq_AmZcQVwg&oh=00_AfX3tnRERiQM-XGiwgtIPJn0e0btVwdM7KgvULIqqrz-ag&oe=68B49A47";
+
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,8 +30,9 @@ export default function SignupPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       setLoading(false);
       return;
     }
@@ -69,7 +73,7 @@ export default function SignupPage() {
         {/* Left side: Image with overlay */}
         <div className="hidden md:flex md:w-1/2 relative bg-gradient-to-br from-[#2B7A78] to-[#3AAFA9] items-center justify-center">
           <img
-            src="/campus-students.jpg"
+            src={unsplashUrl}
             alt="Students"
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80"
           />
@@ -83,7 +87,7 @@ export default function SignupPage() {
         </div>
         {/* Right side: Form card */}
         <div className="flex-1 flex items-center justify-center bg-white">
-          <div className="w-full max-w-md p-8 rounded-2xl shadow-none">
+          <div className="w-full max-w-md p-8 rounded-2xl shadow-none flex flex-col justify-center">
             {showCheckEmail ? (
               <div className="text-center mb-20">
                 <p className="text-xl font-semibold mb-2 text-[#2B7A78]">Check your email</p>
@@ -98,19 +102,35 @@ export default function SignupPage() {
                   Create your account to get started
                 </p>
                 <form onSubmit={handleSignup} className="space-y-5">
-                  <div>
-                    <Label htmlFor="name" className="block mb-1 font-medium text-gray-700">
-                      Full Name
-                    </Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={(e) => updateFormData("name", e.target.value)}
-                      required
-                      className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
-                    />
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <Label htmlFor="name" className="block mb-1 font-medium text-gray-700">
+                        Full Name
+                      </Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => updateFormData("name", e.target.value)}
+                        required
+                        className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <Label htmlFor="studentId" className="block mb-1 font-medium text-gray-700">
+                        Student ID
+                      </Label>
+                      <Input
+                        id="studentId"
+                        type="text"
+                        placeholder="ST001"
+                        value={formData.studentId}
+                        onChange={(e) => updateFormData("studentId", e.target.value)}
+                        required
+                        className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
+                      />
+                    </div>
                   </div>
                   <div>
                     <Label htmlFor="email" className="block mb-1 font-medium text-gray-700">
@@ -126,65 +146,53 @@ export default function SignupPage() {
                       className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="studentId" className="block mb-1 font-medium text-gray-700">
-                      Student ID
-                    </Label>
-                    <Input
-                      id="studentId"
-                      type="text"
-                      placeholder="ST001"
-                      value={formData.studentId}
-                      onChange={(e) => updateFormData("studentId", e.target.value)}
-                      required
-                      className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="password" className="block mb-1 font-medium text-gray-700">
-                      Password
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Create a password"
-                        value={formData.password}
-                        onChange={(e) => updateFormData("password", e.target.value)}
-                        required
-                        className="rounded-lg border-gray-300 px-4 py-2 pr-12 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:bg-transparent"
-                        onClick={() => setShowPassword(!showPassword)}
-                        tabIndex={-1}
-                      >
-                        {showPassword ? (
-                          <EyeOff className="h-5 w-5" />
-                        ) : (
-                          <Eye className="h-5 w-5" />
-                        )}
-                      </Button>
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <Label htmlFor="password" className="block mb-1 font-medium text-gray-700">
+                        Password
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          id="password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Create a password"
+                          value={formData.password}
+                          onChange={(e) => updateFormData("password", e.target.value)}
+                          required
+                          className="rounded-lg border-gray-300 px-4 py-2 pr-12 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
+                        />
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:bg-transparent"
+                          onClick={() => setShowPassword(!showPassword)}
+                          tabIndex={-1}
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-5 w-5" />
+                          ) : (
+                            <Eye className="h-5 w-5" />
+                          )}
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="confirmPassword" className="block mb-1 font-medium text-gray-700">
-                      Confirm Password
-                    </Label>
-                    <Input
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="Confirm your password"
-                      value={formData.confirmPassword}
-                      onChange={(e) =>
-                        updateFormData("confirmPassword", e.target.value)
-                      }
-                      required
-                      className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
-                    />
+                    <div className="flex-1">
+                      <Label htmlFor="confirmPassword" className="block mb-1 font-medium text-gray-700">
+                        Confirm Password
+                      </Label>
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Confirm your password"
+                        value={formData.confirmPassword}
+                        onChange={(e) =>
+                          updateFormData("confirmPassword", e.target.value)
+                        }
+                        required
+                        className="rounded-lg border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#3AAFA9] focus:border-[#2B7A78] transition"
+                      />
+                    </div>
                   </div>
                   <div className="flex items-center mb-1">
                     <input
@@ -233,7 +241,7 @@ export default function SignupPage() {
       {/* Responsive BG image for mobile */}
       <div className="md:hidden fixed inset-0 -z-10">
         <img
-          src="/campus-students.jpg"
+          src={unsplashUrl}
           alt="Students"
           className="w-full h-full object-cover object-center opacity-80"
         />
