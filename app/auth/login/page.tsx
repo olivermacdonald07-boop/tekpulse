@@ -9,6 +9,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import supabase from "@/lib/supabase";
 
+const unsplashUrl =
+  "https://scontent.facc7-1.fna.fbcdn.net/v/t39.30808-6/480782457_1132763061972858_5591730858718956336_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFc59sk6Z5O_MPqd5J6uvsFZGQ9aqygCl5kZD1qrKAKXhIHeBlJhy2fSaKoWG8yBc3Np06rGBniDT9BMraj8VwT&_nc_ohc=lQHzw_7JJpkQ7kNvwFef22j&_nc_oc=AdlS2E2h8X-AMyRwfLVxII2FxE5otKNEXtg2sYDoqXWQ_F99maVIKacwBpoJPFWC4Bo&_nc_zt=23&_nc_ht=scontent.facc7-1.fna&_nc_gid=zWyIPde42V2fnqxd4SsyVQ&oh=00_AfUt1STzzIdqkfmxo3DtHV7YGhScjWVPeWXnBdwYhlwBvw&oe=68B4ACB6";
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -85,7 +88,7 @@ export default function LoginPage() {
         {/* Left side: Image with overlay */}
         <div className="hidden md:flex md:w-1/2 relative bg-gradient-to-br from-[#2B7A78] to-[#3AAFA9] items-center justify-center">
           <img
-            src="/campus-students.jpg"
+            src={unsplashUrl}
             alt="Students"
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80"
           />
@@ -171,7 +174,7 @@ export default function LoginPage() {
       {/* Responsive BG image for mobile */}
       <div className="md:hidden fixed inset-0 -z-10">
         <img
-          src="/campus-students.jpg"
+          src={unsplashUrl}
           alt="Students"
           className="w-full h-full object-cover object-center opacity-80"
         />
