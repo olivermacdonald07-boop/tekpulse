@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 const unsplashUrl =
   "https://scontent.facc7-1.fna.fbcdn.net/v/t39.30808-6/480782457_1132763061972858_5591730858718956336_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFc59sk6Z5O_MPqd5J6uvsFZGQ9aqygCl5kZD1qrKAKXhIHeBlJhy2fSaKoWG8yBc3Np06rGBniDT9BMraj8VwT&_nc_ohc=lQHzw_7JJpkQ7kNvwFef22j&_nc_oc=AdlS2E2h8X-AMyRwfLVxII2FxE5otKNEXtg2sYDoqXWQ_F99maVIKacwBpoJPFWC4Bo&_nc_zt=23&_nc_ht=scontent.facc7-1.fna&_nc_gid=zWyIPde42V2fnqxd4SsyVQ&oh=00_AfUt1STzzIdqkfmxo3DtHV7YGhScjWVPeWXnBdwYhlwBvw&oe=68B4ACB6";
